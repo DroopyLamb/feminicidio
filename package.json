@@ -4,7 +4,7 @@
   "description": "Servidor para chatbot Unefon",
   "main": "index.js",
   "scripts": {
-    "start": "node app"
+    "start": "node index"
   },
   "keywords": [
     "ChatBot",
