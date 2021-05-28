@@ -1,10 +1,10 @@
 {
-  "name": "paginaunefon",
+  "name": "paginafeminicidio",
   "version": "1.0.0",
   "description": "Pagina Feminicidio",
   "main": "index.js",
   "scripts": {
-    "start": "node index,js"
+    "start": "node index"
   },
   "keywords": [
     "ChatBot",
