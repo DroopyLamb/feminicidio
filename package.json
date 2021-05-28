@@ -1,10 +1,10 @@
 {
   "name": "paginaunefon",
   "version": "1.0.0",
-  "description": "Servidor para chatbot Unefon",
+  "description": "Pagina Feminicidio",
   "main": "index.js",
   "scripts": {
-    "start": "node index"
+    "start": "node index,js"
   },
   "keywords": [
     "ChatBot",
