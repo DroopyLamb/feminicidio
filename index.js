@@ -5,6 +5,6 @@ const port = process.env.PORT || 3000;
 
 
 app.use(express.static(__dirname + "/public/"));
-app.listen('3000', function() {
+app.listen(port, function() {
     console.log("Servidor web iniciado en puerto 3000. https://localhost:3000//");
-})
+});
