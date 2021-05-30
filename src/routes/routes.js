@@ -40,8 +40,8 @@ module.exports = app => {
         res.render('Feminicidio');
     })
 
-    app.get('/Formulario', (req, res) => {
-        res.render('Formulario');
+    app.get('/formulario', (req, res) => {
+        res.render('formulario');
     });
 
     app.get('/Administracion', (req, res) => {
