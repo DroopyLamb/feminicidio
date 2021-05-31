@@ -168,43 +168,72 @@ module.exports = app => {
                     });
                 }
                 if (usuario) {
-                    console.log(usuario);
+                    // console.log(usuario);
                     res.render('update', {
                         usuario
                     });
 
                 }
-
             });
     });
 
     app.post('/update/:id', (req, res) => {
         const { id } = req.params;
-        const { usuario, nombre, password, correo, telefono, terminos } = req.body;
+        const body = req.body;
 
-        Usuario.findOneAndUpdate({ id }, { usuario, nombre, password, correo, telefono, terminos }, (err, usuarioBD) => {
-            if (err) {
-                return res.status(400).json({
-                    ok: false,
-                    err
-                });
+        //console.log('req.params: ' + req.params.id);
+
+
+        Usuario.findByIdAndUpdate(id, body, (err, userUpdated) => {
+            if (err) res.status(500).send({ message: `Error al actualizar el usuario: ${err}` });
+            /* res.status(200).send({ Message: 'Usuario actualizado', usuario: userUpdated }); */
+            if (userUpdated) {
+                Usuario.find({})
+                    .exec((err, usuarios) => {
+                        if (err) {
+                            return res.status(400).json({
+                                ok: false,
+                                err
+                            });
+                        }
+                        if (usuarios) {
+                            res.render('usuarios', {
+                                usuarios
+                            });
+                        }
+
+                    });
             }
-            console.log(usuarioBD);
-            res.json({
-                ok: true,
-                usuario: usuarioBD
-            });
         });
 
-        /* if (password === password2) {
-            // Encriptación de contraseña, una sola vía
-            const salt = bcryptjs.genSaltSync(12); //Número de evueltas que dará
-            password = bcryptjs.hashSync(password, salt);
-            if (terminos === 'on') {
-                terminos = true;
-                Usuario.update(id, { usuario, nombre, password, correo, telefono, terminos });
-            }
-        } */
+        app.get('/index', (req, res) => {
+            res.render('index');
+        });
 
+    });
+
+    app.get('/only_user', (req, res) => {
+        res.render('only_user');
+    });
+
+    app.post('/only_user', (req, res) => {
+
+        const { usuario } = req.body;
+        Usuario.findById(usuario)
+            .exec((err, usuario) => {
+                if (err) {
+                    return res.status(400).json({
+                        ok: false,
+                        err
+                    });
+                }
+                if (usuario) {
+                    console.log('usuario' + usuario);
+                    res.render('usuario', {
+                        usuario
+                    });
+
+                }
+            });
     });
 };

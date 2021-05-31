@@ -1,0 +1,40 @@
+<table border="1">
+    <tr>
+        <th>Id</th>
+        <th>Usuario</th>
+        <th>Términos</th>
+        <th>Nombre</th>
+        <th>Password</th>
+        <th>Correo</th>
+        <th>Teléfono</th>
+        <th>Acciones</th>
+    </tr>
+
+    <tr>
+        <td>
+            <%= usuario._id %>
+        </td>
+        <td>
+            <%= usuario.usuario %>
+        </td>
+        <td>
+            <%= usuario.terminos %>
+        </td>
+        <td>
+            <%= usuario.nombre %>
+        </td>
+        <td>
+            <%= usuario.password %>
+        </td>
+        <td>
+            <%= usuario.correo %>
+        </td>
+        <td>
+            <%= usuario.telefono %>
+        </td>
+        <td>
+            <a href="/eliminarUsuario/<%= usuario._id%>">Delete</a>
+            <a href="/update/<%= usuario._id%>">Update</a>
+        </td>
+    </tr>
+</table>
