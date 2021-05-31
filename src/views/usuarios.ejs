@@ -9,13 +9,16 @@
 </head>
 
 <body>
-    <table>
+    <table border="1">
         <tr>
             <th>Id</th>
+            <th>Usuario</th>
             <th>Términos</th>
             <th>Nombre</th>
             <th>Password</th>
             <th>Correo</th>
+            <th>Teléfono</th>
+            <th>Acciones</th>
         </tr>
 
         <% if (usuarios) { %>
@@ -23,6 +26,9 @@
                 <tr>
                     <td>
                         <%= usuarios[i]._id %>
+                    </td>
+                    <td>
+                        <%= usuarios[i].usuario %>
                     </td>
                     <td>
                         <%= usuarios[i].terminos %>
@@ -37,7 +43,10 @@
                         <%= usuarios[i].correo %>
                     </td>
                     <td>
-                        <a href="/delete/<%= usuarios[i]._id%>">Delete</a>
+                        <%= usuarios[i].telefono %>
+                    </td>
+                    <td>
+                        <a href="/eliminarUsuario/<%= usuarios[i]._id%>">Delete</a>
                         <a href="/update/<%= usuarios[i]._id%>">Update</a>
                     </td>
                 </tr>

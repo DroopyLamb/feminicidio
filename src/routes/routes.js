@@ -42,7 +42,7 @@ module.exports = app => {
 
     app.get('/Feminicidio', (req, res) => {
         res.render('Feminicidio');
-    })
+    });
 
     app.get('/formulario', (req, res) => {
         res.render('formulario');
@@ -62,9 +62,6 @@ module.exports = app => {
 
     //Rutas CRUD
     //Método post
-    app.get('/vistaPrueba', (req, res) => {
-        res.render('vistaPrueba');
-    });
 
     app.post('/formulario', (req, res) => {
         let { usuario, nombre, password, password2, correo, telefono, terminos } = req.body;
@@ -118,15 +115,96 @@ module.exports = app => {
                     });
                 }
                 if (usuarios) {
-
-                    console.log(usuarios);
                     res.render('usuarios', {
                         usuarios
                     });
                 }
 
-            })
+            });
     });
 
+    app.get('/eliminarUsuario/:id', (req, res) => {
+        const { id } = req.params;
+        console.log(req.params);
+        Usuario.findByIdAndRemove(id, (err, usuarioBorrado) => {
+            // Si hay un error
+            if (err) {
+                return res.status(400).json({
+                    ok: false,
+                    err
+                });
+            }
+            // Usuario no encontrado
+            if (!usuarioBorrado) {
+                return res.status(400).json({
+                    ok: false,
+                    err: {
+                        message: 'Usuario no encontrado'
+                    }
+                });
+            }
 
+            //Borrado exitoso
+            res.json({
+                ok: 'Usuario borrado',
+                usuario: {
+                    message: 'Usuario borrado exitosamente',
+                    usuarioBorrado
+                }
+            });
+
+        });
+    });
+
+    //Actualizaciones
+    app.get('/update/:id', (req, res) => {
+        const { id } = req.params;
+        Usuario.findById(id)
+            .exec((err, usuario) => {
+                if (err) {
+                    return res.status(400).json({
+                        ok: false,
+                        err
+                    });
+                }
+                if (usuario) {
+                    console.log(usuario);
+                    res.render('update', {
+                        usuario
+                    });
+
+                }
+
+            });
+    });
+
+    app.post('/update/:id', (req, res) => {
+        const { id } = req.params;
+        const { usuario, nombre, password, correo, telefono, terminos } = req.body;
+
+        Usuario.findOneAndUpdate({ id }, { usuario, nombre, password, correo, telefono, terminos }, (err, usuarioBD) => {
+            if (err) {
+                return res.status(400).json({
+                    ok: false,
+                    err
+                });
+            }
+            console.log(usuarioBD);
+            res.json({
+                ok: true,
+                usuario: usuarioBD
+            });
+        });
+
+        /* if (password === password2) {
+            // Encriptación de contraseña, una sola vía
+            const salt = bcryptjs.genSaltSync(12); //Número de evueltas que dará
+            password = bcryptjs.hashSync(password, salt);
+            if (terminos === 'on') {
+                terminos = true;
+                Usuario.update(id, { usuario, nombre, password, correo, telefono, terminos });
+            }
+        } */
+
+    });
 };
