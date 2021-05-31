@@ -1,40 +1,58 @@
-<table border="1">
-    <tr>
-        <th>Id</th>
-        <th>Usuario</th>
-        <th>Términos</th>
-        <th>Nombre</th>
-        <th>Password</th>
-        <th>Correo</th>
-        <th>Teléfono</th>
-        <th>Acciones</th>
-    </tr>
+<!DOCTYPE html>
+<html lang="en">
 
-    <tr>
-        <td>
-            <%= usuario._id %>
-        </td>
-        <td>
-            <%= usuario.usuario %>
-        </td>
-        <td>
-            <%= usuario.terminos %>
-        </td>
-        <td>
-            <%= usuario.nombre %>
-        </td>
-        <td>
-            <%= usuario.password %>
-        </td>
-        <td>
-            <%= usuario.correo %>
-        </td>
-        <td>
-            <%= usuario.telefono %>
-        </td>
-        <td>
-            <a href="/eliminarUsuario/<%= usuario._id%>">Delete</a>
-            <a href="/update/<%= usuario._id%>">Update</a>
-        </td>
-    </tr>
-</table>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://necolas.github.io/normalize.css/8.0.1/normalize.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/estilos2.css">
+    <link rel="stylesheet" href="/css/table.css">
+    <title>Búsqueda por ID</title>
+</head>
+
+<body>
+    <h1>Búsqueda por Id</h1>
+    <table>
+        <tr>
+            <th>Id</th>
+            <th>Usuario</th>
+            <th>Términos</th>
+            <th>Nombre</th>
+            <th>Password</th>
+            <th>Correo</th>
+            <th>Teléfono</th>
+            <th>Acciones</th>
+        </tr>
+
+        <tr>
+            <td>
+                <%= usuario._id %>
+            </td>
+            <td>
+                <%= usuario.usuario %>
+            </td>
+            <td>
+                <%= usuario.terminos %>
+            </td>
+            <td>
+                <%= usuario.nombre %>
+            </td>
+            <td>
+                <%= usuario.password %>
+            </td>
+            <td>
+                <%= usuario.correo %>
+            </td>
+            <td>
+                <%= usuario.telefono %>
+            </td>
+            <td>
+                <a href="/eliminarUsuario/<%= usuario._id%>" class="delete">Borarr</a>
+                <a href="/update/<%= usuario._id%>" class="update">Actualizar</a>
+            </td>
+        </tr>
+    </table>
+</body>
+
+</html>

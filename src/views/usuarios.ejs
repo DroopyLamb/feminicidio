@@ -3,56 +3,62 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://necolas.github.io/normalize.css/8.0.1/normalize.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/estilos2.css">
+    <link rel="stylesheet" href="/css/table.css">
     <title>Todos los usuarios</title>
 </head>
 
 <body>
-    <table border="1">
-        <tr>
-            <th>Id</th>
-            <th>Usuario</th>
-            <th>Términos</th>
-            <th>Nombre</th>
-            <th>Password</th>
-            <th>Correo</th>
-            <th>Teléfono</th>
-            <th>Acciones</th>
-        </tr>
+    <h1 align="center">Todos los usuarios</h1>
+    <div class="table">
+        <table>
+            <tr>
+                <th>Id</th>
+                <th>Usuario</th>
+                <th>Términos</th>
+                <th>Nombre</th>
+                <th>Password la contraseña está encriptada</th>
+                <th>Correo</th>
+                <th>Teléfono</th>
+                <th>Acciones</th>
+            </tr>
 
-        <% if (usuarios) { %>
-            <% for (var i = 0; i < usuarios.length; i++) { %>
-                <tr>
-                    <td>
-                        <%= usuarios[i]._id %>
-                    </td>
-                    <td>
-                        <%= usuarios[i].usuario %>
-                    </td>
-                    <td>
-                        <%= usuarios[i].terminos %>
-                    </td>
-                    <td>
-                        <%= usuarios[i].nombre %>
-                    </td>
-                    <td>
-                        <%= usuarios[i].password %>
-                    </td>
-                    <td>
-                        <%= usuarios[i].correo %>
-                    </td>
-                    <td>
-                        <%= usuarios[i].telefono %>
-                    </td>
-                    <td>
-                        <a href="/eliminarUsuario/<%= usuarios[i]._id%>">Delete</a>
-                        <a href="/update/<%= usuarios[i]._id%>">Update</a>
-                    </td>
-                </tr>
-                <% }  %>
-                    <% } %>
-    </table>
+            <% if (usuarios) { %>
+                <% for (var i = 0; i < usuarios.length; i++) { %>
+                    <tr>
+                        <td>
+                            <%= usuarios[i]._id %>
+                        </td>
+                        <td>
+                            <%= usuarios[i].usuario %>
+                        </td>
+                        <td>
+                            <%= usuarios[i].terminos %>
+                        </td>
+                        <td>
+                            <%= usuarios[i].nombre %>
+                        </td>
+                        <td>
+                            <%= usuarios[i].password %>
+                        </td>
+                        <td>
+                            <%= usuarios[i].correo %>
+                        </td>
+                        <td>
+                            <%= usuarios[i].telefono %>
+                        </td>
+                        <td>
+                            <a href="/eliminarUsuario/<%= usuarios[i]._id%>" class="delete">Borrar</a>
+                            <a href="/update/<%= usuarios[i]._id%>" class="update">Actualizar</a>
+                        </td>
+                    </tr>
+                    <% }  %>
+                        <% } %>
+        </table>
+    </div>
 </body>
 
 </html>
