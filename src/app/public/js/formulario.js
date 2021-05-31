@@ -1,7 +1,11 @@
-const formulario = document.getElementById('formulario');
 const inputs = document.querySelectorAll('#formulario input');
 
+
+const inputPassword1 = document.getElementById('password');
+const inputPassword2 = document.getElementById('password2');
+
 const expresiones = {
+
     usuario: /^[a-zA-Z0-9\_\-]{4,16}$/, // Letras, numeros, guion y guion_bajo
     nombre: /^[a-zA-ZÀ-ÿ\s]{1,40}$/, // Letras y espacios, pueden llevar acentos.
     password: /^.{4,12}$/, // 4 a 12 digitos.
@@ -60,9 +64,6 @@ const validarCampo = (expresion, input, campo) => {
 }
 
 const validarPassword2 = () => {
-    const inputPassword1 = document.getElementById('password');
-    const inputPassword2 = document.getElementById('password2');
-
     if (inputPassword1.value !== inputPassword2.value) {
         document.getElementById(`grupo__password2`).classList.add('formulario__grupo-incorrecto');
         document.getElementById(`grupo__password2`).classList.remove('formulario__grupo-correcto');
@@ -85,8 +86,8 @@ inputs.forEach((input) => {
     input.addEventListener('blur', validarFormulario);
 });
 
-formulario.addEventListener('submit', (e) => {
-    e.preventDefault();
+formulario.addEventListener('submit', () => {
+
 
     const terminos = document.getElementById('terminos');
     if (campos.usuario && campos.nombre && campos.password && campos.correo && campos.telefono && terminos.checked) {
@@ -104,3 +105,11 @@ formulario.addEventListener('submit', (e) => {
         document.getElementById('formulario__mensaje').classList.add('formulario__mensaje-activo');
     }
 });
+
+
+
+
+/* fetch('http://localhost:8081/formulario', {
+    method:'POST',
+    body:
+}) */

@@ -1,3 +1,7 @@
+const Usuario = require('../models/usuario');
+const { dbConnection } = require('../config/database');
+const bcryptjs = require('bcryptjs');
+
 module.exports = app => {
 
 
@@ -55,5 +59,74 @@ module.exports = app => {
     app.get('/onu', (req, res) => {
         res.render('onu');
     });
+
+    //Rutas CRUD
+    //Método post
+    app.get('/vistaPrueba', (req, res) => {
+        res.render('vistaPrueba');
+    });
+
+    app.post('/formulario', (req, res) => {
+        let { usuario, nombre, password, password2, correo, telefono, terminos } = req.body;
+        console.log(req.body);
+
+        console.log(password);
+        console.log(password2);
+        if (password === password2) {
+            // Encriptación de contraseña, una sola vía
+            const salt = bcryptjs.genSaltSync(12); //Número de evueltas que dará
+            password = bcryptjs.hashSync(password, salt);
+            if (terminos === 'on') {
+                terminos = true;
+                // Creamos un objeto del tipo usuario con esos valores
+                let user = new Usuario({
+                    usuario,
+                    nombre,
+                    password,
+                    correo,
+                    telefono,
+                    terminos
+                });
+                // Grabar en la base de datos
+                user.save((err, usuarioDB) => {
+                    if (err) {
+                        return res.status(400).json({
+                            ok: false,
+                            err
+                        });
+                    }
+                    res.json({
+                        ok: true,
+                        usuario: usuarioDB
+                    });
+
+                });
+            }
+        } else {
+            res.redirect('formulario');
+        }
+
+    });
+
+    app.get('/usuarios', (req, res) => {
+        Usuario.find({})
+            .exec((err, usuarios) => {
+                if (err) {
+                    return res.status(400).json({
+                        ok: false,
+                        err
+                    });
+                }
+                if (usuarios) {
+
+                    console.log(usuarios);
+                    res.render('usuarios', {
+                        usuarios
+                    });
+                }
+
+            })
+    });
+
 
 };
